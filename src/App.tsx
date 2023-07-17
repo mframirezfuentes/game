@@ -4,9 +4,9 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
-import PlatformSelected from "./components/PlatformSelector";
-import { Platform } from "./components/PlatformIconList";
-import SortSelector from "./components/sortSelector";
+import PlatformSelector from "./components/PlatformSelector";
+import SortSelector from "./components/SortSelector";
+import { Platform } from "./hooks/useGames";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -19,7 +19,7 @@ function App() {
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main" `,
+        base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`,
       }}
       templateColumns={{
@@ -34,14 +34,14 @@ function App() {
         <GridItem area="aside" padding={5}>
           <GenreList
             selectedGenre={gameQuery.genre}
-            onSelectedGenred={(genre) => setGameQuery({ ...gameQuery, genre })}
+            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre})}
           />
         </GridItem>
       </Show>
 
       <GridItem area="main">
         <HStack spacing={5} paddingLeft={2} marginBottom={5}>
-          <PlatformSelected
+          <PlatformSelector
             selectedPlatform={gameQuery.platform}
             onSelectPlatform={(platform) =>
               setGameQuery({ ...gameQuery, platform })
